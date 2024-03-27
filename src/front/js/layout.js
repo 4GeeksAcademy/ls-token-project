@@ -19,22 +19,14 @@ const Layout = () => {
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
     //Global state //ADD to "value" on app context
     const [currentUser, setCurrentUser] = useState("")
+    const [token, setToken] = useState("")
     const [logIn, setLogIn] = useState(false)
     //Fetches as Functions
-    const getFetch = (endpoint, setter) => {
-        fetch(`"https://crispy-engine-r44qp959gjp525vxw-3001.app.github.dev/api/${endpoint}`)
-            .then(response => {
-                setter(response.json)
-                return response.json
-            })
-            .catch(error => {
-                console.log('Oh No! There was a problem: \n', error);
-            });
-    }
+
 
     return (
         <div>
-            <AppContext.Provider value={{ currentUser, setCurrentUser, getFetch, logIn, setLogIn }}>
+            <AppContext.Provider value={{ currentUser, setCurrentUser, logIn, setLogIn, token, setToken }}>
                 <BrowserRouter basename={basename}>
                     <ScrollToTop>
                         <Navbar />

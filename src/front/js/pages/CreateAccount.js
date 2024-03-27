@@ -2,9 +2,11 @@ import React from "react";
 import "../../styles/home.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../layout";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const Createuser = () => {
+    const { token, setToken } = useContext(AppContext)
+    const navigate = useNavigate()
 
     //Local Hooks to Capture User Input
     const [username, setUsername] = useState("")
@@ -39,6 +41,10 @@ export const Createuser = () => {
                         setPassword("")
                         setPasswordCheck("")
                         setErrorMsg("")
+                        setToken("firsttimelogin")
+                        navigate("/home")
+
+
                     }
 
                 })
@@ -55,28 +61,32 @@ export const Createuser = () => {
 
     return (
         <div className="container mt-5">
-            <div className="col-3"></div>
-            <div className="col">
-                <div className="alert alert-danger" role="alert" style={{ display: errorMsg == "" ? "none" : "block" }}>
-                    {errorMsg}
+            <div className="row">
+                <div className="col-3"></div>
+                <div className="col">
+                    <div className="h2 text-center text-light"><span>Create Account</span></div>
+                    <div className="alert alert-danger" role="alert" style={{ display: errorMsg == "" ? "none" : "block" }}>
+                        {errorMsg}
+                    </div>
+                    <form>
+                        <div className="mb-3 text-light">
+                            <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={username} onChange={(e) => { setUsername(e.target.value) }} />
+                        </div>
+                        <div className="mb-3 text-light">
+                            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                            <input type="password" className="form-control" id="exampleInputPassword1" value={password} onChange={(e) => { setPassword(e.target.value) }} />
+                        </div>
+                        <div className="mb-3 text-light">
+                            <label htmlFor="exampleInputPassword1" className="form-label">Confirm</label>
+                            <input type="password" className="form-control" id="exampleInputPassword2" value={passwordCheck} onChange={(e) => { setPasswordCheck(e.target.value) }} />
+                        </div>
+                        <button type="button" className="btn btn-primary" onClick={() => { parentFunction() }}>Submit</button>
+                    </form>
                 </div>
-                <form>
-                    <div className="mb-3 text-light">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={username} onChange={(e) => { setUsername(e.target.value) }} />
-                    </div>
-                    <div className="mb-3 text-light">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" value={password} onChange={(e) => { setPassword(e.target.value) }} />
-                    </div>
-                    <div className="mb-3 text-light">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Confirm</label>
-                        <input type="password" className="form-control" id="exampleInputPassword2" value={passwordCheck} onChange={(e) => { setPasswordCheck(e.target.value) }} />
-                    </div>
-                    <button type="button" className="btn btn-primary" onClick={() => { parentFunction() }}>Submit</button>
-                </form>
+                <div className="col-3"></div>
             </div>
-            <div className="col-3"></div>
+
 
         </div>
     )
