@@ -9,46 +9,10 @@ export const Login = () => {
 	const { currentUser, setCurrentUser } = useContext(AppContext)
 
 	//Local hooks
-	const [userName, setUserName] = useState("")
+	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
 	const [error, setError] = useState("")
 	const navigate = useNavigate()
-
-
-	// const submitUserName = () => {
-	// 	fetch((`https://scaling-space-acorn-977rjvgv76wxcpvp9-3001.app.github.dev/api/getuser`), {
-	// 		method: 'POST',
-	// 		body: JSON.stringify({
-	// 			"username": userName,
-	// 			"password": password
-	// 		}
-
-	// 		), // data can be a 'string' or an {object} which comes from somewhere further above in our application
-	// 		headers: {
-	// 			'Content-Type': 'application/json'
-	// 		}
-	// 	})
-	// 		.then(res => {
-	// 			if (!res.ok) throw Error(res.statusText);
-	// 			return res.json();
-	// 		})
-	// 		.then(response => {
-	// 			console.log('Success:', response)
-	// 			setCurrentUser(response)
-	// 			setUserName("")
-	// 			setPassword("")
-	// 			logUserin(response.good_message)
-	// 		})
-	// 		.catch(error => console.error(error));
-	// }
-
-	// const logUserin = (msg) => {
-	// 	if (msg) {
-	// 		navigate("/agendas")
-	// 	} else {
-	// 		setError('Your Username or Password is incorrect')
-	// 	}
-	// }
 
 
 
@@ -71,7 +35,7 @@ export const Login = () => {
 					</div>
 					<div className="row m-2">
 						<div className="col">
-							<input type="email" className="form-control" id="colFormLabel" placeholder="Username" onChange={(e) => { setUserName(e.target.value) }} value={userName} />
+							<input type="email" className="form-control" id="colFormLabel" placeholder="Username" onChange={(e) => { setUsername(e.target.value) }} value={username} />
 						</div>
 					</div>
 					<div className="row m-2">
@@ -82,7 +46,7 @@ export const Login = () => {
 					<div className="row m-2">
 						<div className="col d-flex justify-content-center text-align-center">
 							<button type="button" className="btn btn-light m-1" onClick={() => { navigate("/createuser") }}>New Account</button>
-							<button type="button" className="btn btn-success m-1">Log in</button>
+							<button type="button" className="btn btn-success m-1" onClick={() => { navigate("/home") }}>Log in</button>
 						</div>
 					</div>
 				</div>
